@@ -50,7 +50,7 @@ def print_results(channel_name, num_freq_slots, frequency_slot, freq):
     # See REFERENCE1 @ L552 and L584
     # frequency_slot is actually (frequency_slot - 1), since modulus (%) returns values from 0 to (numFrequencySlots - 1)
     print(f"Frequency Slot: {frequency_slot + 1}") 
-    print(f"Selected Frequency: {freq}")
+    print(f"Selected Frequency: {freq} MHz")
 
 def main():
     # Argument parser setup.
