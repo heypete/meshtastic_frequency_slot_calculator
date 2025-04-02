@@ -1,6 +1,20 @@
 # meshtastic_frequency_slot_calculator
- Calculates the frequency slot for a given Meshtastic channel name.
- 
+Calculates the frequency slot for a given Meshtastic channel name.
+
+## Motivation
+
+In the US region, Meshtastic uses the `LONG_FAST` [preset](https://meshtastic.org/docs/configuration/radio/lora/#modem-preset) modem preset by default. This works well in many areas, but I live in the San Francisco Bay Area which has many nodes and thus the [local group named BayMe.sh](https://bayme.sh/docs/getting-started/recommended-settings/) has recommended that users use the `MEDIUM_SLOW` preset instead to minimize network congestion.
+
+The BayMe.sh instructions provide information about how to set up one's node to use that configuration on the primary channel. If one keeps the [frequency slot](https://meshtastic.org/docs/configuration/radio/lora/#frequency-slot) set to the default value of `0`, Meshtastic will use the hash-based algorithm for determining the frequency slot corresponding to that channel name. However, it can be desirable to [use a private primary channel and the default as a secondary channel](https://meshtastic.org/docs/configuration/tips/#creating-a-private-primary-with-default-secondary). 
+
+Unfortunately, there's a complication: Meshtastic uses a hash-based algorithm based only on the [primary channel's name](https://meshtastic.org/docs/configuration/radio/channels/).
+
+When a node is configured to use the default `LONG_FAST` modem preset, the default primary channel name is `LongFast` (although similarly named, the modem preset and channel name are different things entirely, with the channel name being essentially a chat room name). In the US, the `LongFast` channel uses frequency slot 20 (906.875 MHz). If one uses a private primary channel with a different name and moves the default `LongFast` channel to a secondary channel, they need to explicitly set the frequency slot for the primary channel to `20` (for `LongFast`) in order to see the default traffic on the secondary channel.
+
+I was interested in setting up a private primary channel and moving the defaults to a secondary channel, but I did not know the frequency slot for the `MediumSlow` channel (the name of the default channel for the `MEDIUM_SLOW` modem preset). Using `20` wouldn't work, since that's the slot for `LongFast`, not `MediumSlow`. In order to get the local `MediumSlow` traffic and participate in the mesh, I needed to know the frequency slot for the `MediumSlow` channel.
+
+Fortunately, Meshtastic is open source and I was able to [read the source](https://github.com/meshtastic/firmware/blob/f6ed10f3298abf6896892ca7906d3231c8b3f567/src/mesh/RadioInterface.cpp) and implement the frequency slot calculation algorithm in python so I could calculate the slot for the `MediumSlow` channel.
+
 ## Usage
 ```
 python3 frequency_slot.py
