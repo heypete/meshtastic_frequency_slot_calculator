@@ -18,7 +18,7 @@ Fortunately, Meshtastic is open source and I was able to [read the source](https
 ### Added Fun and Complications
 Since the frequency slot value depends only on the channel name and the number of frequency slots in the region (104, in the US), it's possible calculate the frequency slot for any arbitrary channel name, even ones not associated with the built-in modem presets. However, ***the modem presets, channel names, and frequency slots all must exactly match those of other people one wishes to communicate with***.
 
-For example, it's possible to use the `SHORT_FAST` modem preset with slot `52` (which correponds to the `MediumSlow` channel name), but that won't allow one to communicate with people (sensibly) using the `MediumSlow` channel name and the `MEDIUM_SLOW` modem presets.
+For example, it's possible to use the `SHORT_FAST` modem preset with slot `52` (which correponds to the `MediumSlow` channel name), but that won't allow one to communicate with people (sensibly) using the `MediumSlow` channel name and the `MEDIUM_SLOW` modem presets. I can't think of any reason why someone would *want* to do that, but I wanted to mention that it's possible in case someone accidentally does it and wonders why they can't communicate with anyone.
 
 ## Usage
 ```
