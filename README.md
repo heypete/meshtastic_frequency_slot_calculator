@@ -13,10 +13,12 @@ When a node is configured to use the default `LONG_FAST` modem preset, the defau
 
 I was interested in setting up a private primary channel and moving the defaults to a secondary channel, but I did not know the frequency slot for the `MediumSlow` channel (the name of the default channel for the `MEDIUM_SLOW` modem preset). Using `20` wouldn't work, since that's the slot for `LongFast`, not `MediumSlow`. In order to get the local `MediumSlow` traffic and participate in the mesh, I needed to know the frequency slot for the `MediumSlow` channel.
 
-Fortunately, Meshtastic is open source and I was able to [read the source](https://github.com/meshtastic/firmware/blob/f6ed10f3298abf6896892ca7906d3231c8b3f567/src/mesh/RadioInterface.cpp) and implement the frequency slot calculation algorithm in python so I could calculate the slot for the `MediumSlow` channel.
+Fortunately, Meshtastic is open source and I was able to [read the source](https://github.com/meshtastic/firmware/blob/f6ed10f3298abf6896892ca7906d3231c8b3f567/src/mesh/RadioInterface.cpp) and implement the frequency slot calculation algorithm in python so I could calculate the slot for the `MediumSlow` channel. It turns out the slot for `MediumSlow` is `52`.
 
 ### Added Fun and Complications
-Since the frequency slot depends only on the channel name and the number of frequency slots in the region (104, in the US), it's possible calculate the frequency slot for any arbitrary channel name, even ones not associated with the built-in modem presets.
+Since the frequency slot value depends only on the channel name and the number of frequency slots in the region (104, in the US), it's possible calculate the frequency slot for any arbitrary channel name, even ones not associated with the built-in modem presets. However, the modem presets, channel names, and frequency slots all must exactly match those of other people one wishes to communicate with.
+
+For example, it's possible to use the `SHORT_FAST` modem preset with slot `52` (which correponds to the `MediumSlow` channel name), but that won't allow one to communicate with people (sensibly) using the `MediumSlow` channel name and the `MEDIUM_SLOW` modem presets.
 
 ## Usage
 ```
