@@ -15,10 +15,10 @@ I was interested in setting up a private primary channel and moving the defaults
 
 Fortunately, Meshtastic is open source and I was able to [read the source](https://github.com/meshtastic/firmware/blob/f6ed10f3298abf6896892ca7906d3231c8b3f567/src/mesh/RadioInterface.cpp) and implement the frequency slot calculation algorithm in python so I could calculate the slot for the `MediumSlow` channel. It turns out the slot for `MediumSlow` is `52`.
 
-### Added Fun and Complications
+### Traps for New Players
 Since the frequency slot value depends only on the channel name and the number of frequency slots in the region (104, in the US), it's possible calculate the frequency slot for any arbitrary channel name, even ones not associated with the built-in modem presets. However, ***the modem presets, channel names, and frequency slots all must exactly match those of other people one wishes to communicate with***.
 
-For example, it's possible to use the `SHORT_FAST` modem preset with slot `52` (which correponds to the `MediumSlow` channel name), but that won't allow one to communicate with people (sensibly) using the `MediumSlow` channel name and the `MEDIUM_SLOW` modem presets. I can't think of any reason why someone would *want* to do that, but I wanted to mention that it's possible in case someone accidentally does it and wonders why they can't communicate with anyone.
+For example, it's possible to configure your Meshtastic node to use the `LONG_FAST` modem preset[^2] with slot `52` (which correponds to the `MediumSlow` channel name), but that won't allow one to communicate with people using the `MEDIUM_SLOW` modem preset even if they are also using the `MediumSlow` channel name. I can't think of any reason why someone would *want* to do that, but I wanted to mention that it's possible in case someone accidentally does it and wonders why they can't communicate with anyone.
 
 ## Usage
 ```
@@ -52,3 +52,4 @@ Selected Frequency: 910.875 MHz
 
 ### Footnotes
 [^1]: Although similarly named, the modem preset and channel name are different things entirely: the modem preset defines the bandwidth, spreading factor, and other parameters for the LoRa mdoem itself, while the channel name being essentially a chat room name.
+[^2]: Or any valid, manually-configured modem settings.
