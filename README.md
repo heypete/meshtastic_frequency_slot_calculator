@@ -16,7 +16,7 @@ I was interested in setting up a private primary channel and moving the defaults
 Fortunately, Meshtastic is open source and I was able to [read the source](https://github.com/meshtastic/firmware/blob/f6ed10f3298abf6896892ca7906d3231c8b3f567/src/mesh/RadioInterface.cpp) and implement the frequency slot calculation algorithm in python so I could calculate the slot for the `MediumSlow` channel. It turns out the slot for `MediumSlow` is `52`.
 
 ### Added Fun and Complications
-Since the frequency slot value depends only on the channel name and the number of frequency slots in the region (104, in the US), it's possible calculate the frequency slot for any arbitrary channel name, even ones not associated with the built-in modem presets. However, the modem presets, channel names, and frequency slots all must exactly match those of other people one wishes to communicate with.
+Since the frequency slot value depends only on the channel name and the number of frequency slots in the region (104, in the US), it's possible calculate the frequency slot for any arbitrary channel name, even ones not associated with the built-in modem presets. However, ***the modem presets, channel names, and frequency slots all must exactly match those of other people one wishes to communicate with***.
 
 For example, it's possible to use the `SHORT_FAST` modem preset with slot `52` (which correponds to the `MediumSlow` channel name), but that won't allow one to communicate with people (sensibly) using the `MediumSlow` channel name and the `MEDIUM_SLOW` modem presets.
 
