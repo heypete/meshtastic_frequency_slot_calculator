@@ -15,8 +15,6 @@ I was interested in setting up a private primary channel and moving the defaults
 
 Fortunately, Meshtastic is open source and I was able to [read the source](https://github.com/meshtastic/firmware/blob/f6ed10f3298abf6896892ca7906d3231c8b3f567/src/mesh/RadioInterface.cpp) and implement the frequency slot calculation algorithm in python so I could calculate the slot for the `MediumSlow` channel.
 
-[^1]: Although similarly named, the modem preset and channel name are different things entirely: the modem preset defines the bandwidth, spreading factor, and other parameters for the LoRa mdoem itself, while the channel name being essentially a chat room name.
-
 ## Usage
 ```
 python3 frequency_slot.py
@@ -38,3 +36,6 @@ Selected Frequency: 914.875 MHz
 
 ## Limitations
 - Currently only produces output for the US region. I hope to add additional regions in the future.
+
+## Footnotes
+[^1]: Although similarly named, the modem preset and channel name are different things entirely: the modem preset defines the bandwidth, spreading factor, and other parameters for the LoRa mdoem itself, while the channel name being essentially a chat room name.
