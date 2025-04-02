@@ -37,5 +37,5 @@ Selected Frequency: 914.875 MHz
 ## Limitations
 - Currently only produces output for the US region. I hope to add additional regions in the future.
 
-## Footnotes
+### Footnotes
 [^1]: Although similarly named, the modem preset and channel name are different things entirely: the modem preset defines the bandwidth, spreading factor, and other parameters for the LoRa mdoem itself, while the channel name being essentially a chat room name.
