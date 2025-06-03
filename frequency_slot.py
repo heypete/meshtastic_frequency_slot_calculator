@@ -66,11 +66,16 @@ def main():
     parser = argparse.ArgumentParser(description="Override channel name for channel frequency calculation.")
     parser.add_argument("--channel-name", "-n", type=str, default="LongFast",
                     help="Specify the channel name (default: 'LongFast').")
+    parser.add_argument("--bandwidth", "-bw", type=int, 
+                    help="Specify the bandwidth in kHz.")
     args = parser.parse_args()
     
     # Get the channel name from arguments.
     channel_name = args.channel_name
-    bw = get_bandwidth_khz(channel_name)
+    if args.bandwidth is not None:
+        bw = args.bandwidth
+    else:
+        bw = get_bandwidth_khz(channel_name)
 
     # Calculate the number of LoRa channels in the region.
     num_freq_slots = calculate_num_freq_slots(freq_start, freq_end, spacing, bw)
