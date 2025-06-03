@@ -16,11 +16,20 @@ import argparse
 
 # Frequency range and other parameters (US)
 # See REFERENCE1 L15 and L26, REFERENCE2.
-FREQ_START = 902.0      # MHz
-FREQ_END = 928.0        # MHz
-SPACING = 0
-BW = 250                # kHz - REFERENCE1 L250
+freq_start = 902.0      # MHz
+freq_end = 928.0        # MHz
+spacing = 0
+bw = 250                # default, unless altered by some preset names
 
+def get_bandwidth_khz(channel_name):
+    """Determine the bandwidth in kHz based on channel name."""
+    if channel_name == "ShortTurbo":
+        return 500
+    elif channel_name in ["LongModerate", "LongSlow"]:
+        return 125
+    else:
+        return 250  # Default bandwidth
+    
 def calculate_num_freq_slots(freq_start, freq_end, spacing, bw):
     """Calculate the total number of frequency slots."""
     return math.floor((freq_end - freq_start) / (spacing + (bw / 1000)))
@@ -61,15 +70,16 @@ def main():
     
     # Get the channel name from arguments.
     channel_name = args.channel_name
+    bw = get_bandwidth_khz(channel_name)
 
     # Calculate the number of LoRa channels in the region.
-    num_freq_slots = calculate_num_freq_slots(FREQ_START, FREQ_END, SPACING, BW)
+    num_freq_slots = calculate_num_freq_slots(freq_start, freq_end, spacing, bw)
 
     # Determine the frequency slot.
     frequency_slot = determine_frequency_slot(channel_name, num_freq_slots)
 
     # Calculate the frequency.
-    freq = calculate_frequency(FREQ_START, frequency_slot, BW)
+    freq = calculate_frequency(freq_start, frequency_slot, bw)
     
     # Print results
     print_results(channel_name, num_freq_slots, frequency_slot, freq)
