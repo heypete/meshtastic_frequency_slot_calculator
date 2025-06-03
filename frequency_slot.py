@@ -25,7 +25,7 @@ def get_bandwidth_khz(channel_name):
     """Determine the bandwidth in kHz based on channel name."""
     if channel_name == "ShortTurbo":
         return 500
-    elif channel_name in ["LongModerate", "LongSlow"]:
+    elif channel_name in ["LongMod", "LongSlow"]:
         return 125
     else:
         return 250  # Default bandwidth
