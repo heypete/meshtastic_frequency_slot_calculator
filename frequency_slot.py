@@ -52,7 +52,7 @@ def calculate_frequency(freq_start, frequency_slot, bw):
     """Calculate the frequency using the new formula."""
     return freq_start + (bw / 2000) + (frequency_slot * (bw / 1000))
 
-def print_results(channel_name, num_freq_slots, frequency_slot, freq):
+def print_results(channel_name, num_freq_slots, frequency_slot, freq, bw):
     """Print results"""
     print(f"Channel Name: {channel_name}")
     print(f"Number of Frequency Slots: {num_freq_slots}")
@@ -60,6 +60,7 @@ def print_results(channel_name, num_freq_slots, frequency_slot, freq):
     # frequency_slot is actually (frequency_slot - 1), since modulus (%) returns values from 0 to (numFrequencySlots - 1)
     print(f"Frequency Slot: {frequency_slot + 1}") 
     print(f"Selected Frequency: {freq} MHz")
+    print(f"Bandwidth: {bw} kHz")
 
 def main():
     # Argument parser setup.
@@ -87,7 +88,7 @@ def main():
     freq = calculate_frequency(freq_start, frequency_slot, bw)
     
     # Print results
-    print_results(channel_name, num_freq_slots, frequency_slot, freq)
+    print_results(channel_name, num_freq_slots, frequency_slot, freq, bw)
 
 # Entry point
 if __name__ == "__main__":
